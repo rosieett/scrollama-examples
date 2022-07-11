@@ -31,7 +31,6 @@ function handleResizeSidebySide() {
         .style("height", figureHeight + "px")
         .style("top", figureMarginTop + "px")
         .style("margin-bottom", figureMarginTop + "px")
-
     // 3. tell scrollama to update new element dimensions
     scroller.resize();
 }
@@ -40,15 +39,15 @@ function handleResizeOverlay() {
     // 2. update the height of the figure
     var figureHeight = window.innerHeight
     var figureMarginTop = 0
-    var articleMarginButton = window.innerHeight * .02
-    console.log(window.innerHeight, figureHeight * 1)
 
     figure_overlay
         .style("height", figureHeight + "px")
         .style("top", figureMarginTop + "px")
+        .style("margin-bottom", 0 + "px")
+
 
     article_overlay
-        .style("margin-bottom", articleMarginButton + "px")
+        .style("margin-bottom", 0 + "px")
 
     // 3. tell scrollama to update new element dimensions
     scroller.resize();
@@ -58,10 +57,11 @@ function handleResizeOverlay() {
 function handleStepEnter(response) {
     //adding in active class to
     document.getElementById(response.element.dataset.target).classList.add('active');
+    console.log(response)
 }
 
 function reset(response) {
-    if (response.direction == 'up') {
+    if (response.direction === 'up') {
         document.getElementById(response.element.dataset.target).classList.remove('active');
     }
 }
