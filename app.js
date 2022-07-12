@@ -32,6 +32,24 @@ function handleResizeSidebySide() {
         .style("top", figureMarginTop + "px")
         .style("margin-bottom", figureMarginTop + "px")
     // 3. tell scrollama to update new element dimensions
+
+
+    // if (window.innerWidth < 1200) {
+    //     scrolly_side
+    //         .attr('class', 'scrolly_overlay')
+    //     figure_side
+    //         .attr('class', 'figure_overlay')
+    //         .style("top", mobileMarginTop + "px")
+    //         .style("margin-bottom", mobileMarginButtom + "px")
+    //     article_side
+    //         .attr('class', 'step_overlay')
+    //     image_side
+    //         .attr('class', 'img_overlay')
+    //         .style("height", 'auto')
+    //     step_side
+    //         .attr('class', 'step_center')
+    // }
+
     scroller.resize();
 }
 
@@ -45,7 +63,6 @@ function handleResizeOverlay() {
         .style("top", figureMarginTop + "px")
         .style("margin-bottom", 0 + "px")
 
-
     article_overlay
         .style("margin-bottom", 0 + "px")
 
@@ -57,7 +74,7 @@ function handleResizeOverlay() {
 function handleStepEnter(response) {
     //adding in active class to
     document.getElementById(response.element.dataset.target).classList.add('active');
-    console.log(response)
+    // console.log(response)
 }
 
 function reset(response) {
