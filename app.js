@@ -6,7 +6,7 @@ var scrolly_side = main.select(".scrolly_side");
 var figure_side = scrolly_side.select(".figure_sideBySide");
 var article_side = scrolly_side.select(".step_sideBySide");
 var image_side = scrolly_side.selectAll(".img_sideBySide")
-var step_side = article_side.selectAll(".step");
+var step_side = article_side.selectAll(".step_side");
 
 //overlay config
 var scrolly_overlay = main.select(".scrolly_overlay");
@@ -15,7 +15,11 @@ var article_overlay = scrolly_overlay.select(".step_overlay");
 var image_overlay = scrolly_overlay.selectAll(".img_overlay")
 var step_overlay = article_overlay.selectAll(".step_center");
 
-
+var scrolly_side2 = main.select(".scrolly_side2");
+var figure_side2 = scrolly_side2.select(".figure_sideBySide2");
+var article_side2 = scrolly_side2.select(".step_sideBySide2");
+var image_side2 = scrolly_side2.selectAll(".img_sideBySide2")
+var step_side2 = article_side2.selectAll(".step_side2");
 
 // initialize the scrollama
 var scroller = scrollama();
@@ -31,24 +35,20 @@ function handleResizeSidebySide() {
         .style("height", figureHeight + "px")
         .style("top", figureMarginTop + "px")
         .style("margin-bottom", figureMarginTop + "px")
-    // 3. tell scrollama to update new element dimensions
 
+    scroller.resize();
+}
 
-    // if (window.innerWidth < 1200) {
-    //     scrolly_side
-    //         .attr('class', 'scrolly_overlay')
-    //     figure_side
-    //         .attr('class', 'figure_overlay')
-    //         .style("top", mobileMarginTop + "px")
-    //         .style("margin-bottom", mobileMarginButtom + "px")
-    //     article_side
-    //         .attr('class', 'step_overlay')
-    //     image_side
-    //         .attr('class', 'img_overlay')
-    //         .style("height", 'auto')
-    //     step_side
-    //         .attr('class', 'step_center')
-    // }
+function handleResizeSidebySide2() {
+
+    // 2. update the height of the figure
+    var figureHeight = window.innerHeight * .8;
+    var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+    figure_side2
+        .style("height", figureHeight + "px")
+        .style("top", figureMarginTop + "px")
+        .style("margin-bottom", figureMarginTop + "px")
 
     scroller.resize();
 }
@@ -72,9 +72,7 @@ function handleResizeOverlay() {
 
 // scrollama event handlers
 function handleStepEnter(response) {
-    //adding in active class to
     document.getElementById(response.element.dataset.target).classList.add('active');
-    // console.log(response)
 }
 
 function reset(response) {
@@ -85,12 +83,11 @@ function reset(response) {
 
 function initSideBySide() {
 
-    // 1. force a resize on load to ensure proper dimensions are sent to scrollama
     handleResizeSidebySide();
 
     scroller
         .setup({
-            step: ".scrolly_side .step_sideBySide .step",
+            step: ".scrolly_side .step_sideBySide .step_side",
             offset: 0.5,
             debug: false
         })
@@ -98,9 +95,24 @@ function initSideBySide() {
         .onStepExit(reset)
 }
 
+function initSideBySide2() {
+
+    handleResizeSidebySide2();
+
+    scroller
+        .setup({
+            step: ".scrolly_side2 .step_sideBySide2 .step_side2",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(handleStepEnter)
+        .onStepExit(reset)
+
+    console.log('working?')
+}
+
 function initOverlay() {
 
-    // 1. force a resize on load to ensure proper dimensions are sent to scrollama
     handleResizeOverlay();
 
     scroller
@@ -111,16 +123,9 @@ function initOverlay() {
         })
         .onStepEnter(handleStepEnter)
         .onStepExit(reset)
-
 }
-
-// var page = document.getElementById(body);
-
-// function handleForm(event) {
-//     event.preventDefault();
-// }
-// body.addEventListener('scroll', handleForm);
 
 
 initSideBySide();
 initOverlay();
+initSideBySide2();
